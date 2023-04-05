@@ -28,21 +28,7 @@ export async function deletePlant(req, res) {
 export async function updatePlant(req, res) {
   const { docId } = req.params;
   const updatePlant = req.body;
-  await coll.updateOne(  { "_id": new ObjectId(docId) }, { $set: updatePlant });
+  await coll.updateOne(  { "_id": new ObjectId(docId) }, { $set: updatePlant })
+    .catch(err => res.status(500).send(err));
   res.status(201).send( { message: "plant has been updated" } );
 }
-
-
-  // try {
-  //   const docId = { "_id": new ObjectId(req.params.docId) };
-  //   const updatePlant = { $set: req.body };
-  //   const returnOption = { returnNewDocument: true};
-
-  //   const query = await coll.findOneAndUpdate( docId, updatePlant, returnOption);
-    
-  //   res.status(201).send( { message: "plant has been updated" } );
-  //   console.table(query.value);
-  // } catch (err) {
-  //   send( { message: "There was an error." } );
-  //   console.log(err);
-  // }
