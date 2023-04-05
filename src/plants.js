@@ -26,14 +26,10 @@ export async function deletePlant(req, res) {
 
 // CRUD: UPDATE
 export async function updatePlant(req, res) {
-    const docId = { "_id": new ObjectId(req.params.docId) };
-    const updatePlant = { $set: req.body };
-    const returnOption = { returnNewDocument: true};
-
-    const query = await coll.findOneAndUpdate( docId, updatePlant, returnOption);
-    
-    res.status(201).send( { message: "plant has been updated" } );
-    console.table(query.value);
+  const { docId } = req.params;
+  const updatePlant = req.body;
+  await coll.updateOne(  { "_id": new ObjectId(docId) }, { $set: updatePlant });
+  res.status(201).send( { message: "plant has been updated" } );
 }
 
 
