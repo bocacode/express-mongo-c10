@@ -26,26 +26,27 @@ export async function deletePlant(req, res) {
 
 // CRUD: UPDATE
 export async function updatePlant(req, res) {
-  const docId = { "_id": new ObjectId(req.params.docId) };
-  const updatePlant = req.body;
+    const docId = { "_id": new ObjectId(req.params.docId) };
+    const updatePlant = { $set: req.body };
+    const returnOption = { returnNewDocument: true};
 
-  await coll.findOneAndUpdate( 
-    { "_id" : docId},
-    { $set: { updatePlant} }
-  );
-  res.status(201).send( { message: "plant has been updated"});
+    const query = await coll.findOneAndUpdate( docId, updatePlant, returnOption);
+    
+    res.status(201).send( { message: "plant has been updated" } );
+    console.table(query.value);
 }
 
 
+  // try {
+  //   const docId = { "_id": new ObjectId(req.params.docId) };
+  //   const updatePlant = { $set: req.body };
+  //   const returnOption = { returnNewDocument: true};
 
-
-
-
-
-
-
-// db.collection.updateOne(
-//   db.restaurant.updateOne(
-//     { "name" : "Central Perk Cafe" },
-//     { $set: { "violations" : 3 } }
-//  );
+  //   const query = await coll.findOneAndUpdate( docId, updatePlant, returnOption);
+    
+  //   res.status(201).send( { message: "plant has been updated" } );
+  //   console.table(query.value);
+  // } catch (err) {
+  //   send( { message: "There was an error." } );
+  //   console.log(err);
+  // }
