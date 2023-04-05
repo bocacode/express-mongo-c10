@@ -16,4 +16,4 @@ Created an Express framework connecting to MongoDB.
 
 [See Express](https://expressjs.com/)
 
-![screen shot](https://upload.wikimedia.org/wikipedia/commons/b/be/Bicho-pregui%C3%A7a_3.jpg)
+![screen shot](https://avatars.githubusercontent.com/u/98851246?s=64&v=4)
